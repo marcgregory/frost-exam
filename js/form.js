@@ -31,7 +31,8 @@ const wifiPasswordInput = document.getElementById("wifi_password");
 
 if (iconShowPassword && wifiPasswordInput && passwordImg) {
   // Initially set to hide icon (since password is hidden)
-  passwordImg.src = "/assets/icons/hide.png";
+  passwordImg.src =
+    "https://res.cloudinary.com/dytmv00iq/image/upload/v1770301718/hide_fmdjck.png";
 
   // Toggle password visibility on click
   iconShowPassword.addEventListener("click", function () {
@@ -39,7 +40,8 @@ if (iconShowPassword && wifiPasswordInput && passwordImg) {
 
     if (currentType === "password") {
       wifiPasswordInput.type = "text";
-      passwordImg.src = "/assets/icons/view.png";
+      passwordImg.src =
+        "https://res.cloudinary.com/dytmv00iq/image/upload/v1770301718/view_wy8ykl.png";
       iconShowPassword.classList.add("visible");
     } else {
       wifiPasswordInput.type = "password";

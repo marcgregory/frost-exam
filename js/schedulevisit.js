@@ -51,7 +51,6 @@ $(document).ready(function () {
     const monthText = $(this).find(".card h3").text().trim().toUpperCase();
     const dayText = parseInt($(this).find(".card p").text().trim(), 10);
 
-    // Gumawa ng Date object para sa card (gamit ang kasalukuyang taon)
     const cardDate = new Date(
       today.getFullYear(),
       monthMap[monthText],
@@ -59,9 +58,8 @@ $(document).ready(function () {
     );
 
     if (cardDate < today) {
-      $(this).remove(); // Tanggalin ang mga nakalipas na petsa
+      $(this).remove();
     } else if (cardDate.getTime() === today.getTime()) {
-      // Dito natin i-aappend ang HTML para hindi mo na kailangan sa manual HTML
       $(this).append('<div class="date"><h3>Today</h3></div>');
       $(this).addClass("is-today");
     }
@@ -92,25 +90,6 @@ $(document).ready(function () {
     .index();
   if (todayIndex !== -1) {
     owl.trigger("to.owl.carousel", [todayIndex, 0]);
-  }
-
-  function generateDates(days = 10) {
-    const result = [];
-    const today = new Date();
-
-    for (let i = 0; i < days; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-
-      result.push({
-        m: d.toLocaleString("en-US", { month: "short" }).toUpperCase(),
-        d: d.getDate(),
-        w: d.toLocaleString("en-US", { weekday: "short" }).toUpperCase(),
-        isToday: i === 0,
-      });
-    }
-
-    return result;
   }
 
   updateNavButtons();
