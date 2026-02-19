@@ -1,0 +1,371 @@
+/* ============================================
+   CSS RESET & VARIABLES
+   ============================================ */
+
+:root {
+  --border-color: #193b6514;
+  --box-shadow-color: #193b650d;
+  --white-color: #ffffff;
+  --color-1: #193b65;
+  --color-2: #3b4358;
+  --color-3: #263348;
+  --color-4: #d6deeb;
+  --color-5: #fbfcff;
+  --color-6: #f0f5fa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "FS Elliot Pro", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+
+input,
+select {
+  margin-top: 8px;
+  width: 100%;
+  display: block;
+  height: 53px;
+  border: 1px solid var(--color-4);
+  border-radius: 6px;
+  background-color: var(--color-5);
+  padding-left: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--color-3);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
+
+/* Custom Select Styling */
+.custom_select_wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.custom_select_wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.custom_select_wrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 9px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.5" d="M1.00305 0.996948L7.34058 7.29578L13.6781 0.996948" stroke="%23193B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* ============================================
+   FORM STRUCTURE
+   ============================================ */
+
+#wifi_form {
+  margin: 0 auto;
+  min-width: 720px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--white-color);
+  box-shadow: 0 4px 4px 0 var(--box-shadow-color);
+}
+
+.wifi_form_header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 20px 30px;
+}
+
+.wifi_form_--title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-1);
+}
+
+/* Field Sections */
+.top_fields,
+.bottom_fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 20px 30px 0 30px;
+}
+
+.bottom_fields {
+  margin-top: 10px;
+}
+
+/* ============================================
+   LAYOUT & SPACING
+   ============================================ */
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.container > div {
+  flex: 1;
+}
+
+.bottom_margin {
+  margin-bottom: 20px;
+}
+
+.box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: var(--color-6);
+  min-height: 248px;
+  height: 100%;
+  gap: 20px;
+}
+
+/* ============================================
+   TYPOGRAPHY & LABELS
+   ============================================ */
+
+label {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  color: var(--color-2);
+}
+
+.wifi_settings h3 {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-1);
+  opacity: 50%;
+}
+
+/* ============================================
+   INTERACTIVE ELEMENTS
+   ============================================ */
+
+.relative_position {
+  position: relative;
+}
+
+.icon_show_password {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  opacity: 40%;
+  cursor: pointer;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.icon_show_password:hover {
+  opacity: 80%;
+}
+
+.icon_show_password.visible {
+  opacity: 100%;
+}
+
+.icon_arrow_up {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+
+.gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Icon collapsed state (down arrow) */
+.icon_arrow_up.collapsed svg path {
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+/* ============================================
+   RESPONSIVE DESIGN - TABLETS
+   ============================================ */
+
+@media (max-width: 768px) {
+  #wifi_form {
+    min-width: auto;
+    width: 95%;
+    border-radius: 8px;
+  }
+
+  .wifi_form_header,
+  .top_fields,
+  .bottom_fields,
+  .box {
+    padding: 15px 20px;
+  }
+
+  .wifi_form_--title {
+    font-size: 20px;
+  }
+
+  .container {
+    gap: 15px;
+  }
+
+  .box {
+    min-height: auto;
+    gap: 15px;
+  }
+
+  input,
+  select {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .gradient {
+    display: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+  html,
+  body {
+    padding: 10px;
+    width: 100%;
+  }
+
+  #wifi_form {
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  .wifi_form_header,
+  .top_fields,
+  .bottom_fields,
+  .box {
+    padding: 12px 15px;
+  }
+
+  .wifi_form_--title {
+    font-size: 18px;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .container.bottom_margin {
+    flex-direction: row;
+  }
+
+  .container > div {
+    flex: none;
+    width: 100%;
+  }
+
+  .container.bottom_margin > div {
+    width: auto;
+    flex: 1;
+  }
+
+  .box {
+    gap: 12px;
+  }
+
+  input,
+  select {
+    height: 44px;
+    font-size: 16px;
+    margin-top: 6px;
+  }
+
+  label {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .icon_show_password {
+    bottom: 12px;
+    right: 15px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .wifi_settings h3 {
+    font-size: 14px;
+  }
+}

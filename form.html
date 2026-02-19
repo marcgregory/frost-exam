@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.cdnfonts.com/css/fs-elliot-pro"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/form.css" />
+    <title>WI-FI Form Submission</title>
+  </head>
+  <body>
+    <form id="wifi_form">
+      <!-- Form Header -->
+      <div class="wifi_form_header">
+        <h3 class="wifi_form--title">2.4 GHz</h3>
+      </div>
+
+      <!-- Basic Settings Section -->
+      <div class="top_fields">
+        <div class="container">
+          <!-- Wi-Fi Name Field -->
+          <div class="wifi_name_container">
+            <label for="wifi_name">Wi-Fi Name</label>
+            <input
+              type="text"
+              id="wifi_name"
+              name="wifi_name"
+              placeholder="Wi-Fi Name"
+              maxlength="30"
+            />
+          </div>
+
+          <!-- Wi-Fi Password Field -->
+          <div class="wifi_password_container relative_position">
+            <label for="wifi_password">Wi-Fi Password</label>
+            <input
+              type="password"
+              id="wifi_password"
+              name="wifi_password"
+              placeholder="Password"
+              maxlength="30"
+            />
+            <div class="icon_show_password">
+              <img
+                src="https://res.cloudinary.com/dytmv00iq/image/upload/v1770301718/view_wy8ykl.png"
+                alt="Show password"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Settings Header -->
+      <div class="bottom_fields">
+        <div class="container bottom_margin">
+          <div class="wifi_settings">
+            <h3>Advanced Settings</h3>
+          </div>
+          <div class="icon_arrow_up">
+            <svg
+              width="17"
+              height="10"
+              viewBox="0 0 17 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.3"
+                d="M1.5 8.00977L8.00976 1.5L14.5195 8.00977"
+                stroke="#193B65"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Settings Section -->
+      <div class="box">
+        <svg
+          class="gradient"
+          width="720"
+          height="16"
+          viewBox="0 0 720 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            x="720"
+            y="6.10352e-05"
+            width="16"
+            height="720"
+            transform="rotate(90 720 6.10352e-05)"
+            fill="url(#paint0_linear_1_32)"
+            fill-opacity="0.4"
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_1_32"
+              x1="720"
+              y1="720"
+              x2="727.385"
+              y2="720"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#C9D4E3" />
+              <stop offset="1" stop-color="#C9D4E3" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- SSID & Authentication Fields -->
+        <div class="container">
+          <div class="ssid_number_container">
+            <label for="ssid_number">SSID Number</label>
+            <div class="custom_select_wrapper">
+              <select id="ssid_number" name="ssid_number">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wifi_authentication_container">
+            <label for="wifi_authentication">Authentication</label>
+            <div class="custom_select_wrapper">
+              <select id="wifi_authentication" name="wifi_authentication">
+                <option value="None">None</option>
+                <option value="WPA/WPA2">WPA/WPA2</option>
+                <option value="WPA2 Mixed">WPA2 Mixed</option>
+                <option value="WPA">WPA</option>
+                <option value="WPA2">WPA2</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Encryption & WPA Key Interval Fields -->
+        <div class="container">
+          <div class="wifi_encryption_mode_container">
+            <label for="wifi_encryption_mode">Encryption Mode</label>
+            <div class="custom_select_wrapper">
+              <select id="wifi_encryption_mode" name="wifi_encryption_mode">
+                <option value="TKIP+AES">TKIP+AES</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wifi_wpa_key_interval_container">
+            <label for="wifi_wpa_key_interval">WPA Key Interval</label>
+            <input
+              type="text"
+              id="wifi_wpa_key_interval"
+              name="wifi_wpa_key_interval"
+              value="3600"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="js/form.js"></script>
+  </body>
+</html>

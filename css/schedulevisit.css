@@ -1,0 +1,378 @@
+:root {
+  --black-color: #000000;
+  --color-white: #ffffff;
+  --color-1: #263348;
+  --color-2: #f8f9fb;
+  --color-3: #0397e5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "FS Elliot Pro", sans-serif;
+  height: 100%;
+  font-family: "FS Elliot Pro", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+}
+
+#schedulevisit {
+  max-width: 998px;
+  width: 100%;
+  max-height: 577px;
+  border-radius: 6px;
+  height: 100%;
+  background-color: var(--color-2);
+  padding: 60px 120px;
+  box-shadow: 0px 8px 16px 0px #314b6326;
+  overflow: hidden;
+}
+
+.gradient-border {
+  border: 3px solid;
+  border-image: linear-gradient(90deg, #3973cb, #65c9e9) 1;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  gap: 20px;
+}
+
+.schedulevisit_wrapper--content {
+  min-height: 152px;
+  height: 100%;
+  flex: 1;
+  min-width: 280px;
+}
+
+.schedulevisit_wrapper--content h3 {
+  margin: 0px 0px 15px 0px;
+  max-width: 337px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--black-color);
+}
+
+.schedulevisit_wrapper--content p {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--color-1);
+  max-width: 430px;
+  width: 100%;
+  line-height: 162%;
+  opacity: 70%;
+  margin: 0;
+}
+
+.schedulevisit_wrapper--demo h3 {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: var(--color-3);
+  margin: 0px 0px 10px 0px;
+}
+
+.schedulevisit_wrapper--demo p {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-1);
+  margin: 0;
+}
+
+button {
+  background-color: var(--color-3);
+  width: 100%;
+  height: 47px;
+  border-radius: 23.5px;
+  border: none;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1.75px;
+  text-transform: uppercase;
+  color: var(--color-white);
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+button:hover {
+  opacity: 80%;
+}
+
+.relative {
+  position: relative;
+}
+
+.carousel_wrapper {
+  position: relative;
+  padding: 0 50px;
+  width: 100%;
+}
+
+.bus_img {
+  position: absolute;
+  top: 40px;
+  right: -22px;
+  width: 259px;
+  height: 171px;
+  max-width: 100%;
+  height: auto;
+}
+
+.date_carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.date_carousel .card {
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #0000001a;
+  padding: 20px;
+  background-color: var(--color-white);
+  min-width: 100px;
+}
+
+.card h3 {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.card p {
+  color: var(--color-1);
+  font-weight: 700;
+  font-size: 40px;
+  margin: 10px 0px 5px 0px;
+}
+
+.card span {
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+  color: var(--color-1);
+  opacity: 70%;
+}
+
+.item {
+  flex: 0 0 41.666%;
+  margin-left: 7.333%;
+}
+
+.date {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-1);
+  opacity: 50%;
+  text-align: center;
+}
+
+.date_carousel_nav_next {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  right: 10px;
+  z-index: 1000;
+  cursor: pointer;
+  width: 41px;
+  height: 82px;
+  transition: all 0.3s ease;
+}
+
+.date_carousel_nav_next svg {
+  width: 100%;
+  height: 100%;
+}
+
+.date_carousel_nav_prev {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  left: 10px;
+  z-index: 1000;
+  cursor: pointer;
+  width: 41px;
+  height: 82px;
+  transition: all 0.3s ease;
+}
+
+.date_carousel_nav_prev svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(180deg);
+}
+
+.date_carousel .active_card {
+  width: 100%;
+  height: auto;
+  background-color: var(--color-3);
+  border-radius: 12px;
+  padding: 25px 15px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.date_carousel .active_card p,
+.date_carousel .active_card span,
+.date_carousel .active_card h3 {
+  color: var(--color-white);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.date_carousel .active_card h3 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+}
+
+.date_carousel .active_card p {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.date_carousel .active_card span {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+}
+
+/* Responsive Design */
+
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
+  #schedulevisit {
+    padding: 40px 30px;
+    max-height: none;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .schedulevisit_wrapper--content h3 {
+    font-size: 32px;
+  }
+
+  .schedulevisit_wrapper--content p {
+    font-size: 16px;
+  }
+
+  .bus_img {
+    display: none;
+  }
+
+  .carousel_wrapper {
+    padding: 0 40px;
+  }
+
+  .date_carousel_nav_next,
+  .date_carousel_nav_prev {
+    width: 35px;
+    height: 70px;
+  }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  #schedulevisit {
+    padding: 30px 20px;
+    border-radius: 4px;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .schedulevisit_wrapper--content h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .schedulevisit_wrapper--content p {
+    font-size: 14px;
+  }
+
+  .schedulevisit_wrapper--demo h3 {
+    font-size: 12px;
+  }
+
+  .schedulevisit_wrapper--demo p {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 12px;
+    height: 42px;
+    margin-top: 30px;
+  }
+
+  .carousel_wrapper {
+    padding: 0 40px;
+  }
+
+  .date_carousel .card {
+    min-width: 80px;
+    padding: 15px 10px;
+  }
+
+  .card p {
+    font-size: 28px;
+  }
+
+  .card h3 {
+    font-size: 12px;
+  }
+
+  .card span {
+    font-size: 8px;
+  }
+
+  .date_carousel .active_card {
+    width: 100%;
+    height: 120px;
+  }
+
+  .date_carousel_nav_next,
+  .date_carousel_nav_prev {
+    width: 30px;
+    height: 60px;
+  }
+}
+
+.card_wrapper {
+  display: flex;
+
+  flex-direction: column;
+}
