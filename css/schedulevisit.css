@@ -91,9 +91,13 @@ body {
   margin: 0;
 }
 
-button {
+/* Button: centered inside #schedulevisit */
+#schedulevisit > button,
+#schedulevisit button {
   background-color: var(--color-3);
-  width: 100%;
+  display: block;
+  width: 320px;
+  max-width: calc(100% - 40px);
   height: 47px;
   border-radius: 23.5px;
   border: none;
@@ -103,7 +107,7 @@ button {
   text-transform: uppercase;
   color: var(--color-white);
   cursor: pointer;
-  margin-top: 50px;
+  margin: 50px auto 0;
 }
 
 button:hover {
@@ -188,7 +192,7 @@ button:hover {
 
 .date_carousel_nav_next {
   position: absolute;
-  top: 35%;
+  top: 40%;
   transform: translateY(-50%);
   right: 10px;
   z-index: 1000;
@@ -205,7 +209,7 @@ button:hover {
 
 .date_carousel_nav_prev {
   position: absolute;
-  top: 35%;
+  top: 40%;
   transform: translateY(-50%);
   left: 10px;
   z-index: 1000;
@@ -336,6 +340,7 @@ button:hover {
     font-size: 12px;
     height: 42px;
     margin-top: 30px;
+    width: 100%;
   }
 
   .carousel_wrapper {
@@ -375,4 +380,19 @@ button:hover {
   display: flex;
 
   flex-direction: column;
+}
+
+/* Today label centered under carousel */
+.today-badge {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-1);
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+/* ensure badge inside owl-item doesn't overflow */
+.owl-item .today-badge {
+  width: 100%;
 }

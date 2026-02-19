@@ -1,100 +1,146 @@
 $(document).ready(function () {
-  $(".owl-carousel").owlCarousel({
+  if (typeof $.fn.owlCarousel !== "function") {
+    console.error(
+      "schedulevisit.js: Owl Carousel plugin not found. Make sure owl.carousel.js is loaded before this script.",
+    );
+    return;
+  }
+
+  // generate an array of upcoming dates (default 21 days)
+  function generateDates(days = 21) {
+    const result = [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < days; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+
+      result.push({
+        m: d.toLocaleString("en-US", { month: "short" }).toUpperCase(),
+        d: d.getDate(),
+        w: d.toLocaleString("en-US", { weekday: "short" }).toUpperCase(),
+        isToday: i === 0,
+      });
+    }
+
+    return result;
+  }
+
+  // Build card HTML and inject into carousel container
+  const daysToShow = 21;
+  const dates = generateDates(daysToShow);
+  const $carousel = $(".date_carousel.owl-carousel");
+  $carousel.empty();
+
+  dates.forEach((item, idx) => {
+    const wrapper = $('<div class="card_wrapper"></div>');
+    const card = $(
+      '<div class="card">' +
+        `<h3>${item.m}</h3>` +
+        `<p>${item.d}</p>` +
+        `<span>${item.w}</span>` +
+        "</div>",
+    );
+    if (item.isToday) {
+      wrapper.addClass("is-today");
+      card.addClass("active_card");
+    }
+    wrapper.append(card);
+    $carousel.append(wrapper);
+  });
+
+  // initialize carousel AFTER injecting cards
+  const owl = $carousel.owlCarousel({
     items: 5,
     dots: false,
     nav: false,
     responsiveClass: true,
     responsive: {
-      0: {
-        items: 1,
-      },
-      600: {
-        items: 3,
-      },
-      1000: {
-        items: 5,
-      },
+      0: { items: 1 },
+      600: { items: 3 },
+      1000: { items: 5 },
     },
   });
 
-  var owl = $(".owl-carousel");
-  owl.owlCarousel();
-  // Go to the next item
+  // navigation buttons
   $(".date_carousel_nav_next").click(function () {
-    owl.trigger("next.owl.carousel");
+    $carousel.trigger("next.owl.carousel");
   });
-
-  // Go to the previous item
   $(".date_carousel_nav_prev").click(function () {
-    owl.trigger("prev.owl.carousel");
+    $carousel.trigger("prev.owl.carousel");
   });
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const monthMap = {
-    JAN: 0,
-    FEB: 1,
-    MAR: 2,
-    APR: 3,
-    MAY: 4,
-    JUN: 5,
-    JUL: 6,
-    AUG: 7,
-    SEP: 8,
-    OCT: 9,
-    NOV: 10,
-    DEC: 11,
-  };
-
-  $(".date_carousel .card_wrapper").each(function () {
-    const monthText = $(this).find(".card h3").text().trim().toUpperCase();
-    const dayText = parseInt($(this).find(".card p").text().trim(), 10);
-
-    const cardDate = new Date(
-      today.getFullYear(),
-      monthMap[monthText],
-      dayText,
-    );
-
-    if (cardDate < today) {
-      $(this).remove();
-    } else if (cardDate.getTime() === today.getTime()) {
-      $(this).append('<div class="date"><h3>Today</h3></div>');
-      $(this).addClass("is-today");
-    }
-  });
-
-  $(".date_carousel .card").click(function () {
-    $(".date_carousel .card").removeClass("active_card");
+  // card click behaviour
+  $carousel.on("click", ".card", function () {
+    $carousel.find(".card").removeClass("active_card");
     $(this).addClass("active_card");
+    // move carousel to clicked item
+    const owlData = $carousel.data("owl.carousel");
+    if (owlData) {
+      const index = $(this).closest(".owl-item").index();
+      // if cloned items present, find relative index
+      const relative = owlData.relative(index);
+      $carousel.trigger("to.owl.carousel", [relative, 300]);
+    }
   });
 
   function updateNavButtons() {
-    const response = owl.data("owl.carousel");
+    const response = $carousel.data("owl.carousel");
+    if (!response) return;
     const currentIndex = response.relative(response.current());
+    const todayWrapper = $(".date_carousel .card_wrapper.is-today").closest(
+      ".owl-item:not(.cloned)",
+    );
+    const todayIndex = todayWrapper.length ? todayWrapper.index() : -1;
 
-    const todayIndex = $(".date_carousel .card_wrapper.is-today")
-      .closest(".owl-item:not(.cloned)")
-      .index();
-
-    if (currentIndex <= todayIndex) {
-      $(".date_carousel_nav_prev").hide();
-    } else {
+    if (todayIndex === -1 || currentIndex > todayIndex) {
       $(".date_carousel_nav_prev").show();
+    } else {
+      $(".date_carousel_nav_prev").hide();
     }
   }
 
-  const todayIndex = $(".date_carousel .card.active_card")
-    .closest(".owl-item")
-    .index();
-  if (todayIndex !== -1) {
-    owl.trigger("to.owl.carousel", [todayIndex, 0]);
+  // place carousel at today's card
+  const todayItem = $carousel
+    .find(".card_wrapper.is-today")
+    .closest(".owl-item");
+  if (todayItem.length) {
+    const idx = todayItem.index();
+    const owlData = $carousel.data("owl.carousel");
+    if (owlData) {
+      const rel = owlData.relative(idx);
+      $carousel.trigger("to.owl.carousel", [rel, 0]);
+    }
   }
 
-  updateNavButtons();
+  // add a single Today badge under the owl-item that contains today's card
+  function placeTodayBadge() {
+    // remove previous badges
+    $carousel.find(".today-badge").remove();
 
-  owl.on("translated.owl.carousel", function () {
+    const target = $carousel
+      .find(".card_wrapper.is-today")
+      .closest(".owl-item:not(.cloned)");
+
+    if (target.length) {
+      const $badge = $('<div class="today-badge">Today</div>');
+      // append inside the owl-item so it stays with that card
+      target.append($badge);
+    }
+  }
+
+  placeTodayBadge();
+  // re-place badge after translations (in case DOM clones change)
+  $carousel.on("translated.owl.carousel refreshed.owl.carousel", function () {
+    placeTodayBadge();
+  });
+
+  // ensure nav state updates on change
+  $carousel.on("translated.owl.carousel", function () {
     updateNavButtons();
   });
+
+  // initial nav state
+  updateNavButtons();
 });
