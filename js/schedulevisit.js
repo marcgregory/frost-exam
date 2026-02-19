@@ -20,6 +20,12 @@ $(document).ready(function () {
         m: d.toLocaleString("en-US", { month: "short" }).toUpperCase(),
         d: d.getDate(),
         w: d.toLocaleString("en-US", { weekday: "short" }).toUpperCase(),
+        iso: d.toISOString(),
+        full: d.toLocaleString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
         isToday: i === 0,
       });
     }
@@ -35,6 +41,7 @@ $(document).ready(function () {
 
   dates.forEach((item, idx) => {
     const wrapper = $('<div class="card_wrapper"></div>');
+    wrapper.attr("data-date", item.iso);
     const card = $(
       '<div class="card">' +
         `<h3>${item.m}</h3>` +
@@ -75,6 +82,18 @@ $(document).ready(function () {
   $carousel.on("click", ".card", function () {
     $carousel.find(".card").removeClass("active_card");
     $(this).addClass("active_card");
+    // update demo day text to the selected date
+    const wrapper = $(this).closest(".card_wrapper");
+    const iso = wrapper.attr("data-date");
+    if (iso) {
+      const d = new Date(iso);
+      const full = d.toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+      $(".schedulevisit_wrapper--demo p").text(full);
+    }
     // move carousel to clicked item
     const owlData = $carousel.data("owl.carousel");
     if (owlData) {
@@ -112,6 +131,11 @@ $(document).ready(function () {
       const rel = owlData.relative(idx);
       $carousel.trigger("to.owl.carousel", [rel, 0]);
     }
+  }
+
+  // set initial demo day text to today's date (first generated date)
+  if (dates.length) {
+    $(".schedulevisit_wrapper--demo p").text(dates[0].full);
   }
 
   // add a single Today badge under the owl-item that contains today's card
